@@ -11,29 +11,97 @@
     <form action="usuarioRegistrado.html">
         <div>
             <label>Nombre:
-                <input type="text" name="txtNombre" placeholder="Ingresa tu nombre">  
+                <input type="text" name="txtNombre"  
+                    placeholder="Ingresa tu nombre" 
+                    required maxlength="40" minlength="2">  
             </label>
         </div>
         <div>
             <label for="txtApellidos">Apellidos:</label>
             <input type="text" id="txtApellidos" name="txtApellidos" placeholder="Ingresa tus apellidos">  
         </div>
-        <button>Registrar</button>
-        apellidos
-        fecha de nacimiento
-        correo
-        telefono
-        estado civil
-        sexo
-        domicilio
-        Estado
-        tarjeta
-        usuario
-        contraseña
+        <div>
+            <label for="txtFechaNac">Fecha de nacimiento:</label>
+            <input type="date" id="txtFechaNac" name="txtFechaNac" placeholder="Fecha de nacimiento">  
+        </div>
+        <div>
+            <label for="txtCorreo">Correo:</label>
+            <input type="email" id="txtCorreo" name="txtCorreo" placeholder="correo@dominio.extension">  
+        </div>
+        <div>
+            <label for="txtTelefono">Telefono:</label>
+            <input type="tel" id="txtTelefono" name="txtTelefono" placeholder="Teléfono">  
+        </div>
+        <fieldset>
+            <legend>Estado civil</legend>
+            <div>
+                <label>
+                    <input type="radio" id="rbtSoltero" name="EdoCivil" checked> Soltero(a)  
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="radio" id="rbtCasado" name="EdoCivil"> Casado(a)  
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="radio" id="rbtDivorciado" name="EdoCivil"> Divorciado(a)  
+                </label>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Sexo</legend>
+            <div>
+                <label>
+                    <input type="radio" id="rbtMasculino" name="Sexo"> Masculino  
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="radio" id="rbtFemenino" name="Sexo" value="Femenino"> Femenino
+                </label>
+            </div>
+        </fieldset>
+        <div>
+            <label for="txtDomicilio">Domicilio:</label>
+            <input type="text" id="txtDomicilio" name="txtDomicilio" 
+            placeholder="Calle #, Colonia, Ciudad" size="100">  
+        </div>
+        <div>
+            <label for="cboEstado">Estado:</label>
+            <select id="cboEstado" name="cboEstado">
+                <option>Aguascalientes</option>
+                <option selected>Guanajuato</option>
+            </select>
+        </div>
+        <div>
+            <label for="txtTarjeta">Tarjeta:</label>
+            <input type="number" id="txtTarjeta" name="txtTarjeta" 
+            placeholder="16 dígitos">  
+        </div>
+        <div>
+            <label for="txtUsuario">Usuario:</label>
+            <input type="text" id="txtUsuario" name="txtUsuario" 
+            placeholder="Usuario para autenticarte en el sistema">  
+        </div>
+        <div>
+            <label for="txContrasenia">contraseña:</label>
+            <input type="password" id="txContrasenia" name="txContrasenia" 
+            placeholder="contraseña para autenticarte en el sistema">  
+        </div>
+
+        <div>
+            <label for="txtComentarios">Comentarios:</label>
+            <textarea id="txtComentarios" name="txtComentarios" 
+            placeholder="Comentarios o sugerencias" rows="4" cols="100">
+            </textarea>  
+        </div>
+        
         Intereses
         Comentarios                
         aceptar los terminos
-
+        <button>Registrar</button>
     </form>
 </body>
 </html>
