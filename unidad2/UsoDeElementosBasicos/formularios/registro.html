@@ -17,6 +17,14 @@
             </label>
         </div>
         <div>
+            <label>No. Control:
+                <input type="text" name="txtNoControl"  
+                    placeholder="Ingresa tu número de control" 
+                    required maxlength="9" minlength="9"
+                    pattern="[GSMTEDACgsmtedac][0-9]{2}12[0-9]{4}">  
+            </label>
+        </div>
+        <div>
             <label for="txtApellidos">Apellidos:</label>
             <input type="text" id="txtApellidos" name="txtApellidos" placeholder="Ingresa tus apellidos">  
         </div>
@@ -81,6 +89,20 @@
             placeholder="16 dígitos">  
         </div>
         <div>
+            <label for="txtDeshabilitado">Deshabilitado:</label>
+            <input type="text" id="txtDeshabilitado" name="txtDeshabilitado" 
+            placeholder="Texto deshabilitado" disabled>  
+        </div>
+        <div>
+            <label for="txtSoloLectura">Solo lectura:</label>
+            <input type="text" id="txtSoloLectura" name="txtSoloLectura" 
+            placeholder="Texto de solo lectura" readonly>  
+        </div>
+        <div>
+            <label for="txtOculto">Oculto:</label>
+            <input type="hidden" id="txtOculto" name="txtOculto">  
+        </div>
+        <div>
             <label for="txtUsuario">Usuario:</label>
             <input type="text" id="txtUsuario" name="txtUsuario" 
             placeholder="Usuario para autenticarte en el sistema">  
@@ -97,11 +119,15 @@
             placeholder="Comentarios o sugerencias" rows="4" cols="100">
             </textarea>  
         </div>
+        <fieldset>
+            <legend>Temas de interés</legend>
+            <label><input type="checkbox" name="intereses" value="Tecnologia">Tecnología</label>
+            <label><input type="checkbox" name="intereses" value="Juegos">Juegos</label>
+        </fieldset>
         
-        Intereses
-        Comentarios                
-        aceptar los terminos
-        <button>Registrar</button>
+        <button type="submit">Registrar</button>
+        <button type="button" onclick="alert('Dio click')">Aceptar (acción del lado del cliente)</button>
+        <button type="reset">Limpiar</button>
     </form>
 </body>
 </html>
