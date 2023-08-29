@@ -13,36 +13,59 @@
         id Aplicable a todo elemento que tenga el id especificado
         clases Aplicable a TODOS los elementos con esa clase
         */
+        /*Cascade Style Sheet*/
         *{
             padding: 0; /*Margen interno*/
             margin: 0; /*Margen externo*/
         }
-        h1{
+        .verde{
+            color:rgb(10, 100, 13);
+        }
+        div h1,h2{
             margin: 10px 30px 20px 30px;
             padding: 8px 10px;
+            color: #fff; /*!important;*/
+            background-color: #000;
         }
         p{
-
+            /*Propiedades shorthand o de acceso directo (múltiples valores)*/
+            /*margin: 5px 10px 20px 10px;*/
+            /*Propiedades específicas para el margen*/
+            margin-top:5px;
+            margin-bottom:20px;
+            margin-left: 10px;
+            margin-right: 10px;
         }
         #ultimo{
-
+            margin-top:10px;
+            border: 1px solid #555;
+            padding:10px;
+            /*border-radius: 10px;*/
+            border-radius: 50%;
+            width:200px;
+            height:200px;
+            text-align: center;
+            line-height: 200px; /*Centrar la línea de texto verticalemte*/
+            /*margin-left: 50%;*/
+            margin: 10px auto 0 auto;
         }
-        .verde{
-
-        }
+        
         .negrita{
-
+            font-weight: bold;
         }
 
     </style>
 </head>
 <body>
-    <h1 style="color:blue; background-color: rgb(139, 220, 241);">Ejercicio con lenguaje de presentación</h1>
+
+    <h1 style="color:blue; background-color: rgb(139, 220, 241);" class="verde">Ejercicio con lenguaje de presentación</h1>
     <p class="verde negrita">Texto de contenido</p>
     <p>Texto de contenido</p>
-    <h2>Primer tema: Selectores</h2>
+    <div><h1>Título dentro de un div</h1></div>
+    <h2 class="verde">Primer tema: Selectores</h2>
     <p class="verde">Texto de contenido</p>
     <p id="ultimo" class="negrita">Texto de contenido</p>
+    <div><h1>Título dentro de un div</h1></div>
 
 </body>
 </html>
