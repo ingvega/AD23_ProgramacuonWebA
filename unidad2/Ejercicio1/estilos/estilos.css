@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    background-image: url(../imgs/vector-OCT-2020-116_generated.jpg);
+    /*background-image: url(../imgs/Logoitsur.png);*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100px;
+}
+
+/*Cualquier imagen que sea hijo directo de header*/
+header > img{
+/*Cualquier imagen dentro de un header*/
+/*header img{*/
+    width:100%;
+    height: 80px;
+}
+
+nav{
+   background-color: rgb(5, 83, 143);
+   align-self: end;
+}
+
+nav li{
+    display: inline-block;
+}
+
+nav a{
+    color:#fff; 
+ }
