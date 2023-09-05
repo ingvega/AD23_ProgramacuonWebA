@@ -21,7 +21,12 @@ header > img{
 
 nav{
    background-color: rgb(5, 83, 143);
-   align-self: end;
+   position: relative;
+   top:100px;
+}
+
+nav ul{
+    font-size: 0;
 }
 
 nav li{
@@ -30,4 +35,14 @@ nav li{
 
 nav a{
     color:#fff; 
+    /*height: 60px;
+    line-height: 60px;*/
+    display: inline-block;
+    padding: 15px 20px;
+    font-size: 16px;
+ }
+
+ nav a:hover{
+    background-color: white;
+    color: rgb(5, 83, 143);
  }
