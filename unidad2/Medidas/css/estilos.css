@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    font-size: 0;
+    
+}
+body>div{
+    /*font-size: 30px;*/
+   font-size: 1.5rem;
+}
+
+body>div>div{
+    font-size: 1.8rem;
+}
+
+body>div>div>div{
+    font-size: 2rem;
+}
+
+#izq,#der{
+    width: 100px;
+    height: 100px;
+    border: 1px solid #000;
+    display: inline-block;
+}
+#izq{
+    width: 30%;
+}
+#der{
+    width: 70%;
+}
