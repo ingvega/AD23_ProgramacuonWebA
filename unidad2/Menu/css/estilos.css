@@ -1,0 +1,94 @@
+/*Pseudoclases
+:hover
+:focus-within
+:focus
+
+font-family
+float
+box-shadow
+left
+position
+cursor
+list-style
+*/
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+li {
+    color: #fff;
+    background: rgb(32, 151, 84);
+    display: block;
+    float: left;
+    padding: 1rem;
+    position: relative;
+    text-decoration: none;
+}
+
+li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+li:hover,
+li:focus-within{
+    background: white;
+    cursor: pointer;
+}
+
+li:hover > a{
+    color: rgb(32, 151, 84);
+}
+
+ul ul {
+    min-width: 5rem;
+    position: absolute;
+    margin-top: 1rem;
+    left: 0;
+    display: none;
+    /*visibility: hidden;*/
+    box-shadow: 1px 1px 2px 2px  rgba(0,0,0,.2);
+}
+
+ul li:hover>ul,
+ul li:focus-within>ul{
+    display: block;
+}
+
+header{
+    position: fixed;
+    margin-top: -4rem;
+}
+form{
+    /*margin:0 auto;
+    margin-top:4rem;*/
+    margin: 4rem auto 0 auto;
+    width: 60vw;
+    padding: 1rem;
+    box-shadow: 2px 2px 3px rgba(0,0,0,.5);
+}
+
+form div{
+    margin:1rem 0;
+}
+
+form div:last-child{
+    text-align: center;
+}
+
+input{
+    padding: 0.3rem 0.5rem;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+}
+label{
+    display: block;
+}
