@@ -70,7 +70,7 @@ form{
     /*margin:0 auto;
     margin-top:4rem;*/
     margin: 4rem auto 0 auto;
-    width: 60vw;
+    width: 40vw;
     padding: 1rem;
     box-shadow: 2px 2px 3px rgba(0,0,0,.5);
 }
@@ -86,9 +86,51 @@ form div:last-child{
 input{
     padding: 0.3rem 0.5rem;
     border-radius: 5px;
-    display: block;
     width: 100%;
+    border: 1px solid #c4c0c0;
+    /*outline: 2px solid #000;
+    outline-offset:2px;
+    */
+    outline:none;
+}
+input:focus, 
+input:hover{
+    box-shadow: 0 0 3px 3px rgba(0,0,255,.5);
 }
 label{
     display: block;
+}
+
+form button{
+    padding: .5rem;
+    border-radius: 3px;
+    border: none;
+}
+.btn-exito,
+.btn-confirmacion,
+.btn-cancelacion{
+    color: white;
+}
+.btn-exito{
+    background-color: seagreen;
+}
+
+.btn-exito:hover{
+    background-color: rgb(22, 102, 57);
+}
+
+.btn-confirmacion{
+    background-color: rgb(41, 41, 233);
+}
+
+.btn-confirmacion:hover{
+    background-color: rgb(10, 65, 146);
+}
+
+.btn-cancelacion{
+    background-color: rgb(194, 18, 18);
+}
+
+.btn-cancelacion:hover{
+    background-color: rgb(156, 6, 6);
 }
