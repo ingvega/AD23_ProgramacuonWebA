@@ -134,3 +134,26 @@ form button{
 .btn-cancelacion:hover{
     background-color: rgb(156, 6, 6);
 }
+
+#frmRegistro{
+    width: 90%;
+    display: flex; 
+    flex-wrap: wrap;   
+}
+
+#frmRegistro div{
+    /*margin: .5rem 1rem;*/
+}
+
+.t1{
+    width: 10%;
+}
+.t2{
+    width: 20%;
+}
+.t3{
+    width: 30%;
+}
+.t7{
+    width: 70%;
+}
