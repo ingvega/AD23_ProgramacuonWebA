@@ -155,17 +155,41 @@ form button{
 }
 
 .t1{
-    width: 10%;
+    width: calc(100% / 12);
 }
 .t2{
-    width: 20%;
+    /*Estilo para prevenir que haya un navegador que no reconozca
+    calc*/
+    /*width: 16.66%;*/
+    width: calc(100% / 6);
 }
-/*CSS3*/
 .t3{
-    width:30%;
-    /*width:calc(30% - 1rem);*/
+    width: 25%;
+}
+.t4{
+    width: calc(100% / 12 * 4);
+}
+.t5{
+    width: calc(100% / 12 * 5);
+}
+.t6{
+    width: 50%;
 }
 .t7{
-    width: 70%;
-    /*width:calc(70% - 1rem);*/
+    width: calc(100% / 12 * 7);
+}
+.t8{
+    width: calc(100% / 12 * 8);
+}
+.t9{
+    width: 75%;
+}
+.t10{
+    width: calc(100% / 12 * 10);
+}
+.t11{
+    width: calc(100% / 12 * 12);
+}
+.t12{
+    width: 100%;
 }

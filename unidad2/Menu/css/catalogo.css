@@ -1,0 +1,21 @@
+#btnAgregar{
+    background-image: url(../imgs/add.png);
+    background-size: 32px 32px;
+    background-repeat: no-repeat;
+    padding: .5rem .5rem .5rem 2rem;
+    
+}
+
+
+/*#btnAgregar{
+    padding: .5rem;
+    padding-left: 2rem;
+    line-height: 32px;
+}
+
+#btnAgregar img{
+    width: 32px;
+    top: 0.5rem;
+    left: 0rem;
+    position: absolute;
+}*/
