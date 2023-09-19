@@ -83,7 +83,7 @@ form div:last-child{
     text-align: center;
 }
 
-input{
+input,select{
     padding: 0.3rem 0.5rem;
     border-radius: 5px;
     width: 100%;
@@ -93,8 +93,14 @@ input{
     */
     outline:none;
 }
-input:focus, 
-input:hover{
+/*Selector solo aplicable a los radios
+input[type="radio"]{
+}
+*/
+input:not([type="radio"]):not([type="check"]):focus, 
+input:not([type="radio"]):not([type="check"]):hover,
+select:focus,
+select:hover{
     box-shadow: 0 0 3px 3px rgba(0,0,255,.5);
 }
 label{
@@ -138,11 +144,14 @@ form button{
 #frmRegistro{
     width: 90%;
     display: flex; 
-    flex-wrap: wrap;   
+    flex-wrap: wrap;
+    /*justify-content: space-between;*/
+    /*gap: 20px;*/
 }
 
 #frmRegistro div{
     /*margin: .5rem 1rem;*/
+    padding: .5rem;
 }
 
 .t1{
@@ -151,9 +160,12 @@ form button{
 .t2{
     width: 20%;
 }
+/*CSS3*/
 .t3{
-    width: 30%;
+    width:30%;
+    /*width:calc(30% - 1rem);*/
 }
 .t7{
     width: 70%;
+    /*width:calc(70% - 1rem);*/
 }
