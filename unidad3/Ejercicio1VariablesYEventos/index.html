@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        
+    </script>
+    <style>
+        button{
+            background-color: lightgray;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        
+    </script>
+
+    <input type="text" value="valor inicial" id="txtNombre">
+    <!--Escribir en el documento-->
+    <button type="button" onclick="document.write('Hola <b>mundo</b>')">Mensaje Documento</button>
+    <!--Usar un cuadro de dialogo-->
+    <button type="button" onclick="alert('Hola <b>mundo</b>'); alert('Otro mensaje')">Mensaje Dialogo</button>
+    <!--Mensaje de depuración (consola)-->
+    <button type="button" onclick="console.log('Mensaje de depuración');console.log(this);">Mensaje Consola</button>
+    <button type="button" onclick="saludar()">Saludar</button>
+    <div id="opciones">
+        <button type="button" style="color:white" id="btnOpc1">Opción 1</button>
+        <button type="button"  id="btnOpc2">Opción 2</button>
+        <button type="button"  id="btnOpc3">Opción 3</button>
+    </div>
+    <script>
+
+        document.getElementById("btnOpc1").addEventListener('click',clickBoton);
+        document.getElementById("btnOpc2").addEventListener('click',clickBoton);
+        document.getElementById("btnOpc3").addEventListener('click',clickBoton);
+
+        function clickBoton(e){
+            console.log(this);
+            console.log(e);
+            //debugger;
+            /*
+            document.getElementById("btnOpc1").style.backgroundColor='lightgray';
+            document.getElementById("btnOpc2").style.backgroundColor='lightgray';
+            document.getElementById("btnOpc3").style.backgroundColor='lightgray';
+            */
+           let botones=this.parentElement.children;
+           for(let i=0;i<botones.length;i++){
+                botones[i].style.backgroundColor='lightgray';
+           }
+            this.style.backgroundColor='blue';
+            //e.target.style.backgroundColor='blue';
+        }
+
+        function marcar(btn){
+            document.getElementById("btnOpc1").style.backgroundColor='lightgray';
+            document.getElementById("btnOpc2").style.backgroundColor='lightgray';
+            document.getElementById("btnOpc3").style.backgroundColor='lightgray';
+            document.getElementById("btnOpc"+btn).style.backgroundColor='blue';
+        }
+
+        function marcar1(){
+            document.getElementById("btnOpc1").style.backgroundColor='blue';
+            document.getElementById("btnOpc2").style.backgroundColor='lightgray';
+            document.getElementById("btnOpc3").style.backgroundColor='lightgray';
+        }
+
+        function marcar2(){
+            document.getElementById("btnOpc2").style='background-color: blue;';
+            document.getElementById("btnOpc1").style.backgroundColor='lightgray';
+            document.getElementById("btnOpc3").style.backgroundColor='lightgray';
+        }
+
+        function marcar3(){
+            document.getElementById("btnOpc3").style='background-color: blue;';
+            document.getElementById("btnOpc1").style.backgroundColor='lightgray';
+            document.getElementById("btnOpc2").style.backgroundColor='lightgray';
+        }
+
+        //alert("Mensaje al cargar la página");
+        a=5;
+        var x=10.5;
+        let y="hola";
+        const z=20;
+        //z++;
+        x+=50;
+        y+=a;
+        console.log(y);
+        function saludar(){
+            let nombre=document.getElementById("txtNombre").value;
+            alert("Hola " + nombre)
+        }
+    </script>
+    
+</body>
+</html>
