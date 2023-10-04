@@ -28,20 +28,46 @@
     <button type="button" onclick="console.log('Mensaje de depuración');console.log(this);">Mensaje Consola</button>
     <button type="button" onclick="saludar()">Saludar</button>
     <div id="opciones">
-        <button type="button" style="color:white" id="btnOpc1">Opción 1</button>
-        <button type="button"  id="btnOpc2">Opción 2</button>
-        <button type="button"  id="btnOpc3">Opción 3</button>
+        <button type="button" style="color:white" id="btnOpc1"></button>
+        <button type="button"  id="btnOpc2"></button>
+        <button type="button"  id="btnOpc3"></button>
     </div>
     <script>
+/*        //Retorna el primer elemento que cumpla con el selector
+        document.querySelector("#btnOpc1")
+        document.querySelector("button")
+        document.querySelector(".seleccionado")
+        document.querySelector("form input:first-child")
+        //Retorna una colección de todos los elementos que cumplan con el selector
+        document.querySelectorAll("form input")
+*/
+        //let btns=document.getElementById("opciones").children;
+        let btns=document.querySelectorAll("#opciones button");
+        btns.forEach(function(element,indice){
+            //element.innerHTML="<b>Boton</b>"; //Texto interpretado como html
+            //element.innerText="<b>Boton</b>"; //Texto interpretado como cadena
+            element.innerText="Botón "+(indice+1);
+            //console.log(element);
+            element.addEventListener('click',clickBoton);
+        });
+        
+        //No enlaza el click porque no se envía una función sino una llamada a la función
+        //document.getElementById("btnOpc3").addEventListener('click',clickBoton(3));
 
-        document.getElementById("btnOpc1").addEventListener('click',clickBoton);
-        document.getElementById("btnOpc2").addEventListener('click',clickBoton);
-        document.getElementById("btnOpc3").addEventListener('click',clickBoton);
+        /*
+        //Usar cuando necesitamos enviar argumentos adicionales a la función
+        document.getElementById("btnOpc3").addEventListener('click',function(e){
+            clickBoton(3)
+        });
+        */
+        
+
 
         function clickBoton(e){
+        //function clickBoton(numBtn){
             console.log(this);
             console.log(e);
-            //debugger;
+            debugger;
             /*
             document.getElementById("btnOpc1").style.backgroundColor='lightgray';
             document.getElementById("btnOpc2").style.backgroundColor='lightgray';
