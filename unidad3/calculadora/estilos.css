@@ -1,0 +1,12 @@
+input{
+    border: 1px solid gray;
+    border-radius: 5px;
+    outline: none;
+}
+.revisado input:invalid{
+    border: 1px solid red;
+}
+
+.revisado input:valid{
+    border: 1px solid green;
+}
