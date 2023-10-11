@@ -1,0 +1,59 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+form{
+    padding: 2rem;
+    width: 30%;
+    margin: 0 auto;
+}
+form div{
+    margin:1rem 0;
+}
+
+form div:last-child{
+    text-align: center;
+    padding: 2rem;
+}
+
+input{
+    margin-top: .5rem;
+    border: 1px solid gray;
+    border-radius: 5px;
+    outline: none;
+    display: block;
+    width: 100%;
+    padding: .5rem .75rem;
+}
+
+.revisado input:invalid{
+    border: 1px solid red;
+}
+
+.revisado input:valid{
+    border: 1px solid green;
+}
+
+label{
+    font-weight: bold;
+}
+
+form div:nth-child(5) label{
+    font-weight: normal;
+}
+
+button{
+    padding: .75rem;
+    border-radius: 5px;
+    border: none;
+    font-size: 1.25rem;
+}
+
+button{
+    background-color: rgb(11, 144, 11);
+    color: white;
+}
+
+button[type=reset]{
+    background-color: orange;
+    color:black;
+}

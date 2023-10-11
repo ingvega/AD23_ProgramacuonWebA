@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <form action="">
+        <div>
+            <label for="">* Nombre completo</label>
+            <input type="text" id="txtNombre" minlength="5" maxlength="60" required>
+        </div>
+        <div>
+            <label for="">* Usuario</label>
+            <input type="text" id="txtUsuario" minlength="6" maxlength="15" required>
+        </div>
+        <div>
+            <label for="">* Contraseña</label>
+            <input type="password" id="txtContrasenia" minlength="8" maxlength="20" required>
+        </div>
+        <div>
+            <label for="">* Confirmar Contraseña</label>
+            <input type="password" id="txtContrasenia2" minlength="8" maxlength="20" required>
+        </div>
+        <div>
+            <label for="">Teléfono</label>
+            <input type="text" id="txtTelefono">
+        </div>
+        <div>
+            <button id="btnRegistrar">Registrar</button>
+            <button type="reset">Limpiar</button>
+        </div>
+    </form>
+    <script src="registro.js"></script>
+</body>
+</html>
