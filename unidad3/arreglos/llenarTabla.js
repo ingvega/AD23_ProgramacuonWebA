@@ -22,9 +22,48 @@ document.addEventListener("DOMContentLoaded",()=>{
     if(localStorage.getItem('personas')){
         personas=JSON.parse(localStorage.getItem('personas'));
     }
-    llenarTablaConcatenando(personas);
+    //llenarTablaConcatenando(personas);
+    llenarTabla(personas);
 });
 
+function llenarTabla(datos){
+    let tbody=document.querySelector("#tblPersonas tbody"),fila,celda;
+    let x,y,z;
+    x=y=z=3;
+    datos.forEach(persona => {
+        fila=document.createElement('tr');
+        
+        celda=document.createElement('td');
+        celda.appendChild(document.createTextNode(persona.clave));
+        fila.appendChild(celda);
+
+        celda=document.createElement('td');
+        if(persona.edad<18) celda.className='menor';
+        celda.appendChild(document.createTextNode(persona.nombre));
+        fila.appendChild(celda);
+
+        celda=document.createElement('td');
+        celda.appendChild(document.createTextNode(persona.edad));
+        fila.appendChild(celda);
+        
+        /*
+        celda=document.createElement('td');
+        celda.innerText=persona.clave;
+        fila.appendChild(celda);
+
+        celda=document.createElement('td');
+        celda.innerText=persona.nombre;
+        if(persona.edad<18) celda.className='menor';
+        fila.appendChild(celda);
+
+        celda=document.createElement('td');
+        celda.innerText=persona.edad;
+        fila.appendChild(celda);
+        */
+
+        tbody.appendChild(fila);
+    });
+}
 function llenarTablaConcatenando(datos){
     //Obtener la referencia del tbody
     let tbody=document.querySelector("#tblPersonas tbody"),contenido='',fila,
@@ -38,5 +77,4 @@ function llenarTablaConcatenando(datos){
         contenido+=fila;
     });
     tbody.innerHTML=contenido;
-
 }
