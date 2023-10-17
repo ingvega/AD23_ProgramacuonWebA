@@ -24,7 +24,12 @@ document.addEventListener("DOMContentLoaded",()=>{
     }
     //llenarTablaConcatenando(personas);
     llenarTabla(personas);
-
+    document.getElementById("btnAgregar").addEventListener('click',
+    ()=>{
+        document.getElementById("titulo").innerText='Agregar persona';
+        document.querySelector("button[type=reset]").click();
+        document.getElementById("spnClave").innerText='';
+    });
     document.getElementById("btnGuardar").addEventListener('click',
         ()=>{
         
@@ -55,6 +60,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 function llenarTabla(datos){
     let tbody=document.querySelector("#tblPersonas tbody"),fila,celda;
+    tbody.innerHTML='';
     let x,y,z;
     x=y=z=3;
     datos.forEach(persona => {
@@ -71,6 +77,32 @@ function llenarTabla(datos){
 
         celda=document.createElement('td');
         celda.appendChild(document.createTextNode(persona.edad));
+        fila.appendChild(celda);
+
+        let btnEditar=document.createElement('button'),
+        btnEliminar=document.createElement('button');
+        btnEditar.innerText='Editar';
+        btnEditar.addEventListener('click',()=>{
+            let clave=persona.clave;
+            let personas=localStorage.getItem('personas')?
+                        JSON.parse(localStorage.getItem('personas')):[];
+            /*(a,b)=>
+            a=>
+            (a,b)=>{}
+            a=>{}*/
+            let obj=personas.find((p)=>p.clave==clave);
+            if(obj){
+                document.getElementById("spnClave").innerText=clave;
+                document.getElementById("txtNombre").value=obj.nombre;
+                document.getElementById("txtEdad").value=obj.edad;
+                document.getElementById("titulo").innerText='Editar persona';
+            }else{
+                alert("Registro no encontrado");
+                llenarTabla();
+            }
+        });
+        celda=document.createElement('td');
+        celda.appendChild(btnEditar);
         fila.appendChild(celda);
         
         /*
