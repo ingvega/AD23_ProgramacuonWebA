@@ -24,6 +24,33 @@ document.addEventListener("DOMContentLoaded",()=>{
     }
     //llenarTablaConcatenando(personas);
     llenarTabla(personas);
+
+    document.getElementById("btnGuardar").addEventListener('click',
+        ()=>{
+        
+        let frm=document.getElementsByTagName("form")[0];
+        if(frm.checkValidity()){
+            
+            let clave=document.getElementById("spnClave").innerText;
+            let personas=localStorage.getItem('personas')?
+            JSON.parse(localStorage.getItem('personas')):[];
+            //'4'==4 true
+            //'4'===4 false
+            //Agregar
+            if(!clave){
+                clave=personas.length?personas[personas.length-1].clave+1:1;
+
+                let nuevo={
+                    clave:clave,
+                    nombre: document.getElementById("txtNombre").value.trim(),
+                    edad: parseInt(document.getElementById("txtEdad").value)
+                };
+                personas.push(nuevo);
+                localStorage.setItem('personas',JSON.stringify(personas));
+            }
+        }    
+    });
+
 });
 
 function llenarTabla(datos){
