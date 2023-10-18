@@ -44,7 +44,6 @@ document.addEventListener("DOMContentLoaded",()=>{
             //Agregar
             if(!clave){
                 clave=personas.length?personas[personas.length-1].clave+1:1;
-
                 let nuevo={
                     clave:clave,
                     nombre: document.getElementById("txtNombre").value.trim(),
@@ -52,6 +51,21 @@ document.addEventListener("DOMContentLoaded",()=>{
                 };
                 personas.push(nuevo);
                 localStorage.setItem('personas',JSON.stringify(personas));
+            }else{
+                //Buscar la posicion de la persona que le corresponde la clave
+                let posicion=personas.findIndex(p=>p.clave==clave);
+                if(posicion>-1){
+                    personas[posicion].nombre=document.getElementById("txtNombre").value.trim();
+                    personas[posicion].edad=parseInt(document.getElementById("txtEdad").value);
+
+                    /*personas[posicion]={
+                        clave:clave,
+                        nombre: document.getElementById("txtNombre").value.trim(),
+                        edad: parseInt(document.getElementById("txtEdad").value)
+                    };*/
+                    localStorage.setItem('personas',JSON.stringify(personas));
+                    alert('Registro actualizado');
+                }
             }
         }    
     });
@@ -103,6 +117,28 @@ function llenarTabla(datos){
         });
         celda=document.createElement('td');
         celda.appendChild(btnEditar);
+        btnEliminar.innerText='Eliminar';
+/*
+        btnEliminar.onclick=function(e){
+
+        };*/
+        btnEliminar.onclick=e=>eliminar(persona.clave,this);
+        /*p=>instruccion
+        (p1,p2)=>instruccion
+        p=>{
+            instruccion1;
+            instruccion2;
+        }
+        (p1,p2)=>{
+            instruccion1;
+            instruccion2;
+        }
+*/
+
+
+        //btnEliminar.onclick=eliminar;
+        btnEliminar.value=persona.clave;
+        celda.appendChild(btnEliminar);
         fila.appendChild(celda);
         
         /*
@@ -123,6 +159,14 @@ function llenarTabla(datos){
         tbody.appendChild(fila);
     });
 }
+
+function eliminar(e){
+    
+    alert(e);
+    alert(this.value);
+    //alert(e.target.value);
+}
+
 function llenarTablaConcatenando(datos){
     //Obtener la referencia del tbody
     let tbody=document.querySelector("#tblPersonas tbody"),contenido='',fila,
