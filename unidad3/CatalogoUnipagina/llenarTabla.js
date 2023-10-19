@@ -122,7 +122,7 @@ function llenarTabla(datos){
         btnEliminar.onclick=function(e){
 
         };*/
-        btnEliminar.onclick=e=>eliminar(persona.clave,this);
+        btnEliminar.onclick=e=>eliminar(persona.clave);//,this);
         /*p=>instruccion
         (p1,p2)=>instruccion
         p=>{
@@ -160,12 +160,41 @@ function llenarTabla(datos){
     });
 }
 
-function eliminar(e){
+function eliminar(clave){
+    let personas=[];
+    if(localStorage.getItem('personas')){
+        personas=JSON.parse(localStorage.getItem('personas'));
+    }
+    let index=personas.findIndex(p=>p.clave==clave);
+    if(index>=0){
+        if(confirm('Está a punto de eliminar a: ' + 
+        personas[index].nombre + ' ¿Desea continuar?')){
+            personas.splice(index,1);
+            localStorage.setItem('personas',JSON.stringify(personas));
+            alert('Persona eliminada');
+            llenarTabla(personas);    
+        }
+    }else{
+        alert('Persona no encontrada');
+        llenarTabla(personas);
+    }
     
-    alert(e);
-    alert(this.value);
-    //alert(e.target.value);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function llenarTablaConcatenando(datos){
     //Obtener la referencia del tbody
