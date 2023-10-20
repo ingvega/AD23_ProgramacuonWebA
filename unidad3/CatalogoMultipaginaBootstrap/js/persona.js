@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded",()=>{
     }
     document.getElementById("btnVolver").addEventListener('click',
         (e)=>{
-        e.preventDefault();
         location.replace('index.html');
     });
 
