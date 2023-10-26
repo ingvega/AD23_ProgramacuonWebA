@@ -32,7 +32,16 @@ document.addEventListener("DOMContentLoaded",()=>{
         window.location.replace('persona.html');
     });
     
-    
+    document.getElementById("mdlConfirmacion").addEventListener('show.bs.modal',(e)=>{
+        let personas=[];
+        if(localStorage.getItem('personas')){
+            personas=JSON.parse(localStorage.getItem('personas'));
+        }
+        let index=personas.findIndex(p=>p.clave==e.relatedTarget.value);
+        if(index>=0){
+            document.getElementById("spnPersona").innerText=personas[index].nombre;
+        }
+    });
 
 });
 
@@ -69,7 +78,14 @@ function llenarTabla(datos){
         celda=document.createElement('td');
         celda.appendChild(btnEditar);
         btnEliminar.innerText='Eliminar';
-        btnEliminar.onclick=e=>eliminar(persona.clave);//,this);
+        btnEliminar.value=persona.clave;
+        btnEliminar.onclick=e=>{
+            //Colocar en el span el nombre de quien eliminar
+            const mdlEliminar = new bootstrap.Modal('#mdlConfirmacion', {
+                backdrop:'static'
+            });
+            mdlEliminar.show(e.target);
+        };
 
         celda.appendChild(btnEliminar);
         fila.appendChild(celda);
