@@ -17,6 +17,7 @@ function cargarPersonas(){
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
+    setTimeout(()=>alert('Mensaje con retardo de 3 segundos'),3000);
     cargarPersonas();
     let personas=[];
     if(localStorage.getItem('personas')){
@@ -31,12 +32,13 @@ document.addEventListener("DOMContentLoaded",()=>{
         //La página actual NO se guarda en el historial
         window.location.replace('persona.html');
     });
-    
+    document.getElementById("btnConfirmar").addEventListener('click',eliminar);
     document.getElementById("mdlConfirmacion").addEventListener('show.bs.modal',(e)=>{
         let personas=[];
         if(localStorage.getItem('personas')){
             personas=JSON.parse(localStorage.getItem('personas'));
         }
+        document.getElementById("btnConfirmar").value=e.relatedTarget.value;
         let index=personas.findIndex(p=>p.clave==e.relatedTarget.value);
         if(index>=0){
             document.getElementById("spnPersona").innerText=personas[index].nombre;
@@ -44,6 +46,21 @@ document.addEventListener("DOMContentLoaded",()=>{
     });
 
 });
+
+/**
+ * Crear dinámicamente una alerta que después de 5 segundos se cierre automáticamente
+ * si el usuario no la cierra
+ * @param {*} texto Mensaje a mostrar en la alerta (puede ser HTML)
+ * @param {*} tipo Puede ser "success", "danger" o "warning"
+ */
+function crearAlerta(texto,tipo){
+    let alerta=document.createElement("div");
+    alerta.className="alert alert-"+tipo+" alert-dismissible fade show";
+    alerta.innerHTML=texto +
+    '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+    document.querySelector("#contenido").
+        insertBefore(alerta,document.getElementById("btnAgregar"));
+}
 
 function llenarTabla(datos){
     let tbody=document.querySelector("#tblPersonas tbody"),fila,celda;
@@ -94,20 +111,21 @@ function llenarTabla(datos){
     });
 }
 
-function eliminar(clave){
+function eliminar(e){
+    
     let personas=[];
     if(localStorage.getItem('personas')){
         personas=JSON.parse(localStorage.getItem('personas'));
     }
+    
+    let clave=this.value;
     let index=personas.findIndex(p=>p.clave==clave);
     if(index>=0){
-        if(confirm('Está a punto de eliminar a: ' + 
-        personas[index].nombre + ' ¿Desea continuar?')){
-            personas.splice(index,1);
-            localStorage.setItem('personas',JSON.stringify(personas));
-            alert('Persona eliminada');
-            llenarTabla(personas);    
-        }
+        personas.splice(index,1);
+        localStorage.setItem('personas',JSON.stringify(personas));
+        crearAlerta('Persona eliminada','success');
+        llenarTabla(personas);    
+        
     }else{
         alert('Persona no encontrada');
         llenarTabla(personas);
