@@ -29,6 +29,8 @@ document.addEventListener("DOMContentLoaded",()=>{
         (e)=>{
         
         let frm=document.getElementsByTagName("form")[0];
+        frm.classList.add("was-validated");
+        e.preventDefault();
         if(frm.checkValidity()){
             //Cancelar el submit para que más adelante la 
             //redirección sí funcione

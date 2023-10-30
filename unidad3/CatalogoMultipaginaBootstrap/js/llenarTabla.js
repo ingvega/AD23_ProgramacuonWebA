@@ -17,7 +17,7 @@ function cargarPersonas(){
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
-    setTimeout(()=>alert('Mensaje con retardo de 3 segundos'),3000);
+    //setTimeout(()=>alert('Mensaje con retardo de 3 segundos'),3000);
     cargarPersonas();
     let personas=[];
     if(localStorage.getItem('personas')){
@@ -55,11 +55,19 @@ document.addEventListener("DOMContentLoaded",()=>{
  */
 function crearAlerta(texto,tipo){
     let alerta=document.createElement("div");
+    alerta.id="divAlerta";
     alerta.className="alert alert-"+tipo+" alert-dismissible fade show";
     alerta.innerHTML=texto +
     '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
     document.querySelector("#contenido").
         insertBefore(alerta,document.getElementById("btnAgregar"));
+    setTimeout(()=>{
+        //alerta.remove();
+        if(document.getElementById("divAlerta")){
+            const alert = bootstrap.Alert.getOrCreateInstance('#divAlerta')
+            alert.close()
+        }
+    },5000);
 }
 
 function llenarTabla(datos){
@@ -132,32 +140,3 @@ function eliminar(e){
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function llenarTablaConcatenando(datos){
-    //Obtener la referencia del tbody
-    let tbody=document.querySelector("#tblPersonas tbody"),contenido='',fila,
-    claseMenor='';
-    datos.forEach(persona => {
-        if(persona.edad<18){ claseMenor=' class="menor"';
-        }else{ claseMenor='';}
-        fila='<tr><td>'+ persona.clave + '</td><td'+claseMenor+'>'+ 
-        persona.nombre +'</td><td>'+persona.edad+'</td></tr>';
-        fila=`<tr><td>${persona.clave}</td><td${claseMenor}>${persona.nombre}</td><td>${persona.edad}</td></tr>`;
-        contenido+=fila;
-    });
-    tbody.innerHTML=contenido;
-}
