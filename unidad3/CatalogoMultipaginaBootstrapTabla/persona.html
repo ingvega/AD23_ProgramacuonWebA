@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container w-50">
+        <form action="" class="needs-validation" novalidate>
+            <h4 id="titulo">Agregar persona</h4>
+            <div class="row">
+                <div class="col-4 mb-3" >
+                    <label class="form-label">Clave:</label>
+                    <span id="spnClave" class="form-control"></span>
+                </div>
+                <div class="col-8 mb-3">
+                    <label class="form-label">Nombre:</label>
+                    <input type="text" class="form-control" id="txtNombre" placeholder="Nombre" minlength="5" required>
+                    <div class="invalid-feedback">
+                        <ul>
+                            <li>El nombre es obligatorio</li>
+                            <li>Debe tener al menos 5 caracteres</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-4 mb-3">
+                    <label class="form-label">Edad:</label>
+                    <input type="text"  class="form-control" id="txtEdad" pattern="[0-9]+" maxlength="3" 
+                    placeholder="Edad" required>
+                </div>
+            </div>
+            <div class="row justify-content-evenly">
+                <button id="btnGuardar" class="col-auto btn btn-primary">Guardar</button>
+                <button type="reset" class="col-auto btn btn-warning">Limpiar</button>
+                <button type="button" id="btnVolver" class="col-auto btn btn-secondary">Volver</button>
+            </div>
+        </form>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/persona.js"></script>
+    
+</body>
+</html>
