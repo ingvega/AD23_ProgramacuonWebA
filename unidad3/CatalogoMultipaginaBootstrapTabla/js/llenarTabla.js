@@ -147,7 +147,7 @@ function eliminar(e){
     if(index>=0){
         personas.splice(index,1);
         localStorage.setItem('personas',JSON.stringify(personas));
-        crearAlerta('Persona eliminada','success'),()=>location.reload());
+        crearAlerta('Persona eliminada','success',()=>location.reload());
         //llenarTabla(personas);            
     }else{
         alert('Persona no encontrada');
