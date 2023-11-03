@@ -10,6 +10,7 @@ function cargarPersonas(){
             {clave:4,nombre:'José Gutiérrez',edad:19},
             {clave:5,nombre:'Margarita Olvera',edad:20},
             {clave:6,nombre:'Alicia Jiménez',edad:21},
+            {clave:7,nombre:'Alicia Jiménez',edad:40}
         ];
         localStorage.setItem('personas',
             JSON.stringify(personas)
@@ -130,7 +131,7 @@ function llenarTabla(datos){
         columnDefs: [
             { orderable: false, targets: -1 }
         ],
-        order: [[1, 'asc']],
+        order: [[1, 'asc'],[2,'desc']],
         
     });
 }
