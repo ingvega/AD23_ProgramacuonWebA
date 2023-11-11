@@ -8,17 +8,40 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
+    
     <?php
       require('menu.php');
-
-      var_dump($_GET);
     ?>
-    <form>
+    <pre>
+    <?php
+      /*var_dump($_GET);*/
+      var_dump($_POST);
+      /*var_dump($_REQUEST);
+      echo count($_POST);
+      echo "\nNOmbre".ISSET($_POST["Nombre"]);
+      echo "\nApellido2".ISSET($_POST["Apellido2"]);
+      echo "\nX".ISSET($_POST["X"]);*/
+    ?>
+    </pre>
+    <form method="post">
         <p>
-        <input type="text" id="txtNombre" name="Nombre" placeholder="Nombre" required>
+        <input type="text" id="txtNombre" name="Nombre" 
+        placeholder="Nombre" required value="<?php echo ISSET($_POST["X"])?$_POST["X"]:""; ?>">
         </p>
         <p>
-            <input type="text" id="txtApellido1" name="Apellido1" placeholder="Primer apellido" required>
+            <?php
+                if(ISSET($_POST["Apellido1"])){
+            ?>
+                <input type="text" id="txtApellido1" name="Apellido1" 
+                placeholder="Primer apellido" value="<?php echo $_POST["Apellido1"] ?>" required>
+            <?php
+                }else{
+            ?>
+                <input type="text" id="txtApellido1" name="Apellido1" placeholder="Primer apellido" required>
+            <?php
+                }
+            ?>
+
         </p>
         <p>
             <input type="text" id="txtApellido2" name="Apellido2" placeholder="Segundo apellido">
@@ -43,22 +66,26 @@
             <input type="checkbox" name="Intereses[]" value="Tecnologia"> Tecnología
         </label>
         <label>
-            <input type="checkbox" name="Intereses" value="Cambio climático"> Cambio climático
+            <input type="checkbox" name="Intereses[]" value="Cambio climático"> Cambio climático
         </label>
         <label>
-            <input type="checkbox" name="Intereses" value="Covid19"> COVID-19
+            <input type="checkbox" name="Intereses[]" value="Covid19"> COVID-19
         </label>
         <label>
-            <input type="checkbox" name="Intereses" value="Politica"> Política
+            <input type="checkbox" name="Intereses[]" value="Politica"> Política
         </label>
         </p>
         <p>
             <select name="EstadoCivil">
-                <option value="1">Soltero</option>
+                <option value="1" <?php echo (ISSET($_POST["EstadoCivil"])
+                                            && $_POST["EstadoCivil"]=="1")
+                                           ?"selected":""; ?>>Soltero</option>
                 <option value="2">Casado</option>
-                <option value="3">Divorciado</option>
-                <option>Viudo</option>
-                <option>Unión Libre</option>
+                <option value="3" <?php echo (ISSET($_POST["EstadoCivil"])
+                                            && $_POST["EstadoCivil"]=="3")
+                                           ?"selected":""; ?>>Divorciado</option>
+                <option value="4">Viudo</option>
+                <option value="5">Unión Libre</option>
             </select>
         </p>
         <p>
