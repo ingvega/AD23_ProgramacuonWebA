@@ -11,6 +11,17 @@
     
     <?php
       require('menu.php');
+
+      function checkIntereses($interes){
+        if(ISSET($_POST["Intereses"])){
+            for($i=0;$i<count($_POST["Intereses"]);$i++){
+                if($_POST["Intereses"][$i]==$interes){
+                    return "checked";
+                }
+            }
+        }
+        return "";
+      }
     ?>
     <pre>
     <?php
@@ -26,14 +37,14 @@
     <form method="post">
         <p>
         <input type="text" id="txtNombre" name="Nombre" 
-        placeholder="Nombre" required value="<?php echo ISSET($_POST["X"])?$_POST["X"]:""; ?>">
+        placeholder="Nombre" required value="<?php echo ISSET($_POST["Nombre"])?$_POST["Nombre"]:"" ?>">
         </p>
         <p>
             <?php
                 if(ISSET($_POST["Apellido1"])){
             ?>
                 <input type="text" id="txtApellido1" name="Apellido1" 
-                placeholder="Primer apellido" value="<?php echo $_POST["Apellido1"] ?>" required>
+                placeholder="Primer apellido" value="<?= $_POST["Apellido1"] ?>" required>
             <?php
                 }else{
             ?>
@@ -44,35 +55,50 @@
 
         </p>
         <p>
-            <input type="text" id="txtApellido2" name="Apellido2" placeholder="Segundo apellido">
+            <input type="text" id="txtApellido2" name="Apellido2" placeholder="Segundo apellido"
+            value="<?= ISSET($_POST["Apellido2"])?$_POST["Apellido2"]:"" ?>">
         </p>
         <p>
-        <input type="number" id="txtEdad" name="Edad" placeholder="Edad" required>
+        <input type="number" id="txtEdad" name="Edad" placeholder="Edad" 
+        value="<?= ISSET($_POST["Edad"])?$_POST["Edad"]:"" ?>"
+        required>
         </p>
         <p>
         <label>
-            <input type="radio" id="rbtMasculino" name="Genero" value="Masculino">
+            <input type="radio" id="rbtMasculino" name="Genero" value="Masculino" 
+            checked
+            >
             Masculino
         </label>
 
         <label>
-            <input type="radio" id="rbtFemenino" name="Genero" Value="Femenino">
+            <input type="radio" id="rbtFemenino" name="Genero" Value="Femenino"
+            <?= (ISSET($_POST["Genero"]) && 
+                $_POST["Genero"]=="Femenino")?"checked":"" ?>>
             Femenino
         </label>
         </p>
         <p>
         <h4>Intereses</h4>
         <label>
-            <input type="checkbox" name="Intereses[]" value="Tecnologia"> Tecnología
+            <input type="checkbox" name="Intereses[]" value="Tecnologia" 
+             <?=checkIntereses("Tecnologia") ?>
+            > Tecnología
         </label>
         <label>
-            <input type="checkbox" name="Intereses[]" value="Cambio climático"> Cambio climático
+            <input type="checkbox" name="Intereses[]" value="Cambio climático"
+             <?=checkIntereses("Cambio climático") ?>
+            > Cambio climático
         </label>
         <label>
-            <input type="checkbox" name="Intereses[]" value="Covid19"> COVID-19
+            <input type="checkbox" name="Intereses[]" value="Covid19"
+             <?=checkIntereses("Covid19") ?>
+            > COVID-19
         </label>
         <label>
-            <input type="checkbox" name="Intereses[]" value="Politica"> Política
+            <input type="checkbox" name="Intereses[]" value="Politica"
+            <?=checkIntereses("Politica") ?>
+            > Política
         </label>
         </p>
         <p>
