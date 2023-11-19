@@ -20,19 +20,35 @@
 <body>
       <?php
       require('menu.php');
+      require_once('../datos/daoUsuario.php');
+      $dao=new DAOUsuario();
+      $listaUsuarios=$dao->obtenerTodos();
+      
       ?>
       <div class="container">
         <a class="btn btn-success mt-5 mb-3" href="usuario.php">Agregar</a>
-        <table id="listaPersonas" class="table table-striped table-bordered">
+        <table id="lista" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th>Clave</th>
-                    <th>Nombre</th>
-                    <th>Edad</th>
+                    <th>Usuario</th>
+                    <th>Correo</th>
+                    <th>Genero</th>
                     <th>Operaciones</th>
                 </tr>
             </thead>
             <tbody>
+              <?php
+                
+                foreach ($listaUsuarios as $usuario){
+                  echo "<tr><td>".trim($usuario->apellido1." ".$usuario->apellido2)." ".$usuario->nombre."</td>".
+                           "<td>".$usuario->email."</td>".
+                           "<td>".($usuario->genero=="M"?"Masculino":"Femenino")."</td>".
+                           "<td><form method='post'>".
+                              "<button formaction='usuario.php' class='btn btn-primary' name='id' value='".$usuario->id."'>Editar</button>".
+                              "<button formaction='listaUsuario.php' class='btn btn-danger' name='id' value='".$usuario->id."'>Eliminar</button>".
+                            "</form></td></tr>";
+                }
+              ?>
                 
             </tbody>
         </table>

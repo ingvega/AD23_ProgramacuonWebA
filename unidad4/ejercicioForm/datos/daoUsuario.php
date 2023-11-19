@@ -2,6 +2,7 @@
 //importa la clase conexión y el modelo para usarlos
 require_once 'conexion.php'; 
 require_once '../modelos/usuario.php'; 
+
 class DAOUsuario
 {
     
@@ -130,10 +131,9 @@ class DAOUsuario
         
 	}
 
-    private function calcularEdad($fechaNac){
-        $f = DateTime::createFromFormat("Y-m-d", $fechaNac);
+    function calcularEdad($fechaNac){
         $h = new DateTime();
-        return $h.date_diff($f,true)->y;
+        return $h->diff($fechaNac)->y;
     }
 
 	/**
@@ -166,7 +166,7 @@ class DAOUsuario
                       $obj->apellido2,
 					  $obj->email,
                       $obj->fechaNac,
-                      calcularEdad($obj->edad),
+                      $this->calcularEdad($obj->fechaNac),
                       $obj->genero,
                       implode($obj->intereses),
                       $obj->edoCivil,
@@ -222,8 +222,8 @@ class DAOUsuario
                  ':apellido1'=>$obj->apellido1,
                  ':apellido2'=>$obj->apellido2,
                  ':email'=>$obj->email,
-                 ':fechaNac'=>$obj->fechaNac,
-                 ':edad'=>calcularEdad($obj->edad),
+                 ':fechaNac'=>$obj->fechaNac->format('Y-m-d'),
+                 ':edad'=>$this->calcularEdad($obj->fechaNac),
                  ':genero'=>$obj->genero,
                  ':intereses'=>implode($obj->intereses),
                  ':estadoCivil'=>$obj->edoCivil,

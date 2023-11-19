@@ -1,11 +1,5 @@
 document.addEventListener('DOMContentLoaded',()=>{
-    let clavePersona=sessionStorage.getItem('clavePersona');
-    if(clavePersona){
-        document.querySelector("form h4").innerText='Editar';
-        cargarPersona(clavePersona);
-    }else{
-        document.querySelector("form h4").innerText='Agregar';
-    }
+    
     document.getElementById("btnAceptar").addEventListener('click',function(e){
         document.querySelector("form").classList.add("was-validated");
         if(document.querySelector("form").checkValidity()){

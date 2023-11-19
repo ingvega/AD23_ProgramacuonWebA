@@ -6,212 +6,195 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        
+        form .row > div{
+            margin: .5rem 0;
+        }
+    </style>
 </head>
 <body>
-    
     <?php
       require('menu.php');
-
-      function checkIntereses($interes){
-        if(ISSET($_POST["Intereses"])){
-            for($i=0;$i<count($_POST["Intereses"]);$i++){
-                if($_POST["Intereses"][$i]==$interes){
-                    return "checked";
-                }
-            }
-        }
-        return "";
-      }
+      require_once('../datos/daoUsuario.php');
+      require_once('usuarioUtil.php');
     ?>
-    <pre>
-    <?php
-        //Aceptar letras caracter punto y espacios
-        //var_dump(preg_match("/^[a-zA-Z.\s]+$/",$_POST["Nombre"]));
-      /*var_dump($_GET);*/
-      var_dump($_POST);
-      /*var_dump($_REQUEST);
-      echo count($_POST);
-      echo "\nNOmbre".ISSET($_POST["Nombre"]);
-      echo "\nApellido2".ISSET($_POST["Apellido2"]);
-      echo "\nX".ISSET($_POST["X"]);*/
-      $valNombre=$valApe1=$valApe2=$valEmail=$valEdad=$valGenero=$valIntereses=$valTerminos=$valEdoCivil="";
-      if(count($_POST)>0){
-        $valNombre=$valApe1=$valApe2=$valEmail=$valEdad=$valGenero=$valIntereses=$valTerminos=$valEdoCivil="is-invalid";
-        $valido=true;
-        if(ISSET($_POST["Nombre"]) && 
-          (strlen(trim($_POST["Nombre"]))>3 && strlen(trim($_POST["Nombre"]))<51) &&
-            preg_match("/^[a-zA-Z.\s]+$/",$_POST["Nombre"])){
-            $valNombre="is-valid";
-        }else{
-            $valido=false;
-        }
-        if(ISSET($_POST["Apellido1"]) && 
-          (strlen(trim($_POST["Apellido1"]))>3 && strlen(trim($_POST["Apellido1"]))<51) &&
-            preg_match("/^[a-zA-Z.\s]+$/",$_POST["Apellido1"])){
-            $valApe1="is-valid";
-        }else{
-            $valido=false;
-        }
-        if(ISSET($_POST["Apellido2"]) && 
-          (strlen(trim($_POST["Apellido2"]))==0) ||
-          (strlen(trim($_POST["Apellido2"]))>3 && strlen(trim($_POST["Apellido2"]))<51) &&
-            preg_match("/^[a-zA-Z.\s]+$/",$_POST["Apellido2"])){
-            $valApe2="is-valid";
-        }else{
-            $valido=false;
-        }
-        if(ISSET($_POST["Email"]) && 
-            filter_var($_POST["Email"],FILTER_VALIDATE_EMAIL)){
-            $valEmail="is-valid";
-        }else{
-            $valido=false;
-        }
-        if(ISSET($_POST["Edad"]) && 
-            is_numeric($_POST["Edad"]) &&
-            $_POST["Edad"]>=18 && $_POST["Edad"]<=100){
-            $valEdad="is-valid";
-        }else{
-            $valido=false;
-        }
-        if(ISSET($_POST["Edad"]) && 
-            is_numeric($_POST["Edad"]) &&
-            $_POST["Edad"]>=18 && $_POST["Edad"]<=100){
-            $valEdad="is-valid";
-        }else{
-            $valido=false;
-        }
+    <div class="container mt-3">
+        <form method="post">
+            <div class="row">
+                <div class="col-4">
+                    <label for="txtNombre" class="form-label">Nombre:</label>
+                    <input type="text" id="txtNombre" name="Nombre" class="form-control <?=$valNombre?>"
+                    placeholder="Nombre" required value="<?php echo ISSET($_POST["Nombre"])?$_POST["Nombre"]:"" ?>">
+                    <div class="invalid-feedback">
+                        <ul>
+                            <li>El nombre es obligatorio</li>
+                            <li>Debe contener solo caracteres alfabéticos</li>
+                            <li>Debe tener entre 2 y 50</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <label for="txtApellido1" class="form-label">Primer apellido:</label>
+                    <input type="text" id="txtApellido1" class="form-control <?=$valApe1?>" 
+                    name="Apellido1" placeholder="Primer apellido" value="<?php echo ISSET($_POST["Apellido1"])?$_POST["Apellido1"]:"" ?>">
+                    <div class="invalid-feedback">
+                        <ul>
+                            <li>El primer apellido es obligatorio</li>
+                            <li>Debe contener solo caracteres alfabéticos</li>
+                            <li>Debe tener entre 2 y 50</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <label for="txtApellido2" class="form-label">Segundo apellido:</label>
+                    <input type="text" id="txtApellido2" class="form-control <?=$valApe2?>" name="Apellido2" placeholder="Segundo apellido"
+                    value="<?= ISSET($_POST["Apellido2"])?$_POST["Apellido2"]:"" ?>">
+                    <div class="invalid-feedback">
+                        <ul>
+                            <li>Debe contener solo caracteres alfabéticos</li>
+                            <li>Debe tener entre 2 y 50</li>
+                        </ul>
+                    </div>
+                </div>
 
+                <div class="col-6">
+                    <label for="txtEmail" class="form-label">Correo:</label>
+                    <input type="email" id="txtEmail"  name="Email" class="form-control <?=$valEmail?>"
+                    placeholder="Correo electrónico" required value="<?php echo ISSET($_POST["Email"])?$_POST["Email"]:"" ?>">
+                    <div class="invalid-feedback">
+                        <ul>
+                            <li>El correo electrónico es obligatorio</li>
+                            <li>Debe tener un formato válido</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <label for="txtFechaNac" class="form-label">Fecha de nacimiento:</label>
+                    <input type="date" id="txtFechaNac" name="FechaNac" class="form-control <?=$valFechaNac?>"  
+                    value="<?= ISSET($_POST["FechaNac"])?$_POST["FechaNac"]:"" ?>"
+                    required>
+                    <div class="invalid-feedback">
+                        <ul>
+                            <li>La fecha de nacimiento es un dato obligatorio</li>
+                            <li>Debes tener 18 años para acceder a los servicios proporcionados por esta aplciación</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <label for="txtContrasenia" class="form-label">Contraseña:</label>
+                    <input type="password" id="txtContrasenia"  name="Password" class="form-control <?=$valPassword?>"
+                    placeholder="Contraseña" required value="<?php echo ISSET($_POST["Password"])?$_POST["Password"]:"" ?>">
+                    <div class="invalid-feedback">
+                        <ul>
+                            <li>La contraseña es requerida</li>
+                            <li>Debe tener entre 6 y 15 caracteres</li>
+                        </ul>
+                    </div>
+                </div>
 
-      }
-    ?>
-    </pre>
-    <form method="post">
-        <div>
+                <div class="col-6">
+                    <label for="txtContrasenia2" class="form-label">Confirmar contraseña:</label>
+                    <input type="password" id="txtContrasenia2" class="form-control <?=$valPassword?>"
+                    placeholder="Contraseña" required value="<?php echo ISSET($_POST["Password"])?$_POST["Password"]:"" ?>">
+                    <div class="invalid-feedback">
+                        <ul>
+                            <li>La contraseña es requerida</li>
+                            <li>Debe tener entre 6 y 15 caracteres</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-4">
+                    <p>Género:</p>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" id="rbtMasculino" name="Genero" value="Masculino" 
+                        checked required>
+                        <label class="form-check-label" for="rbtMasculino">
+                            Masculino
+                        </label>  
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" id="rbtFemenino" class="form-check-input" name="Genero" Value="Femenino"
+                        <?= (ISSET($_POST["Genero"]) && 
+                            $_POST["Genero"]=="Femenino")?"checked":"" ?> required>
+                        <label class="form-check-label" for="rbtFemenino">
+                            Femenino
+                        </label>
+                        <div class="invalid-feedback">
+                            <ul>
+                                <li>El género es obligatorio</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <label for="cboEstadoCivil" class="form-label">Estado civil:</label>
+                    <select class="form-select <?=$valEstadoCivil?>" id="cboEstadoCivil" name="EstadoCivil">
+                        <option value="1" <?php echo (ISSET($_POST["EstadoCivil"])
+                                                    && $_POST["EstadoCivil"]=="1")
+                                                ?"selected":""; ?>>Soltero</option>
+                        <option value="2">Casado</option>
+                        <option value="3" <?php echo (ISSET($_POST["EstadoCivil"])
+                                                    && $_POST["EstadoCivil"]=="3")
+                                                ?"selected":""; ?>>Divorciado</option>
+                        <option value="4" <?php echo (ISSET($_POST["EstadoCivil"])
+                                                    && $_POST["EstadoCivil"]=="4")
+                                                ?"selected":""; ?>>Viudo</option>
+                        <option value="5" <?php echo (ISSET($_POST["EstadoCivil"])
+                                                    && $_POST["EstadoCivil"]=="5")
+                                                ?"selected":""; ?>>Unión Libre</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        <ul>
+                            <li>El estado civil es obligarorio</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12"> 
+                    <p>Intereses:</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Tecnologia"  name="Intereses[]" 
+                            id="chkTecnologia" <?=checkIntereses("Tecnologia") ?>>
+                        <label class="form-check-label" for="chkTecnologia">Tecnología</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="chkCambioClimatico"  name="Intereses[]" 
+                            id="chkCambioClimatico" <?=checkIntereses("Cambio climático") ?>>
+                        <label class="form-check-label" for="chkCambioClimatico">Cambio climático</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Politica"  name="Intereses[]" 
+                            id="chkPolitica" <?=checkIntereses("Politica") ?>>
+                        <label class="form-check-label" for="chkPolitica">Política</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Covid19"  name="Intereses[]" 
+                            id="chkCovid19" <?=checkIntereses("Covid19") ?>>
+                        <label class="form-check-label" for="chkCovid19">COVID-19</label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-check">
+                        
+                        <input id="chkTerminos" class="form-check-input <?=$valTerminos?>" type="checkbox" name="Terminos" >
+                        <label for="chkTerminos" class="form-check-label">Acepto los términos y condiciones</label>
+                        <div class="invalid-feedback">
+                            <ul>
+                                <li>Para continuar con el registro es necesario aceptar los términos y condiciones</li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <button class="btn btn-primary col-4 mx-2">Guardar</button>
+                <button class="btn btn-secondary col-4 mx-2">Cancelar</button>
+            </div>
             
-            <input type="text" id="txtNombre" name="Nombre" class="form-control <?=$valNombre?>"
-            placeholder="Nombre" required value="<?php echo ISSET($_POST["Nombre"])?$_POST["Nombre"]:"" ?>">
-            <div class="invalid-feedback">
-                <ul>
-                    <li>El nombre es obligatorio</li>
-                    <li>Debe contener solo caracteres alfabéticos</li>
-                    <li>Debe tener entre 2 y 50</li>
-                </ul>
-            </div>
-        </div>
-        <div>
-            <?php
-                if(ISSET($_POST["Apellido1"])){
-            ?>
-                <input type="text" id="txtApellido1" name="Apellido1" 
-                class="form-control <?=$valApe1?>" placeholder="Primer apellido" value="<?= $_POST["Apellido1"] ?>" required>
-            <?php
-                }else{
-            ?>
-                <input type="text" id="txtApellido1" class="form-control" name="Apellido1" placeholder="Primer apellido" required>
-            <?php
-                }
-            ?>
-            <div class="invalid-feedback">
-                <ul>
-                    <li>El primer apellido es obligatorio</li>
-                    <li>Debe contener solo caracteres alfabéticos</li>
-                    <li>Debe tener entre 2 y 50</li>
-                </ul>
-            </div>
-        </div>
-        <div>
-            <input type="text" id="txtApellido2" class="form-control <?=$valApe2?>" name="Apellido2" placeholder="Segundo apellido"
-            value="<?= ISSET($_POST["Apellido2"])?$_POST["Apellido2"]:"" ?>">
-            <div class="invalid-feedback">
-                <ul>
-                    <li>Debe contener solo caracteres alfabéticos</li>
-                    <li>Debe tener entre 2 y 50</li>
-                </ul>
-            </div>
-        </div>
-
-        <div>
-            
-            <input type="email" id="txtEmail"  name="Email" class="form-control <?=$valEmail?>"
-            placeholder="Correo electrónico" required value="<?php echo ISSET($_POST["Email"])?$_POST["Email"]:"" ?>">
-            <div class="invalid-feedback">
-                <ul>
-                    <li>El correo electrónico es obligatorio</li>
-                    <li>Debe tener un formato válido</li>
-                </ul>
-            </div>
-        </div>
-
-        <div>
-            <input type="number" id="txtEdad" name="Edad" class="form-control <?=$valEdad?>" placeholder="Edad" 
-            value="<?= ISSET($_POST["Edad"])?$_POST["Edad"]:"" ?>"
-            required>
-            <div class="invalid-feedback">
-                <ul>
-                    <li>La edad es un dato obligatorio</li>
-                    <li>Valores numéricos enteros entre 18 y 100</li>
-                </ul>
-            </div>
-        </div>
-        <div>
-        <label>
-            <input type="radio" id="rbtMasculino" name="Genero" value="Masculino" 
-            checked
-            >
-            Masculino
-        </label>
-
-        <label>
-            <input type="radio" id="rbtFemenino" name="Genero" Value="Femenino"
-            <?= (ISSET($_POST["Genero"]) && 
-                $_POST["Genero"]=="Femenino")?"checked":"" ?>>
-            Femenino
-        </label>
-        </div>
-        <div>
-        <h4>Intereses</h4>
-        <label>
-            <input type="checkbox" name="Intereses[]" value="Tecnologia" 
-             <?=checkIntereses("Tecnologia") ?>
-            > Tecnología
-        </label>
-        <label>
-            <input type="checkbox" name="Intereses[]" value="Cambio climático"
-             <?=checkIntereses("Cambio climático") ?>
-            > Cambio climático
-        </label>
-        <label>
-            <input type="checkbox" name="Intereses[]" value="Covid19"
-             <?=checkIntereses("Covid19") ?>
-            > COVID-19
-        </label>
-        <label>
-            <input type="checkbox" name="Intereses[]" value="Politica"
-            <?=checkIntereses("Politica") ?>
-            > Política
-        </label>
-        </div>
-        <div>
-            <select name="EstadoCivil">
-                <option value="1" <?php echo (ISSET($_POST["EstadoCivil"])
-                                            && $_POST["EstadoCivil"]=="1")
-                                           ?"selected":""; ?>>Soltero</option>
-                <option value="2">Casado</option>
-                <option value="3" <?php echo (ISSET($_POST["EstadoCivil"])
-                                            && $_POST["EstadoCivil"]=="3")
-                                           ?"selected":""; ?>>Divorciado</option>
-                <option value="4">Viudo</option>
-                <option value="5">Unión Libre</option>
-            </select>
-        </div>
-        <div>
-        <label>
-        <input type="checkbox" name="Terminos" >
-        Acepto los términos</label>
-        </div>
-        
-        <button>Enviar</button>
-    </form>
+        </form>
+    </div>
     <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
