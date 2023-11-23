@@ -1,15 +1,15 @@
 <?php
     class Usuario{
-        public $id;
-        public $nombre;
-        public $apellido1;
-        public $apellido2;
-        public $edad;
-        public $fechaNac;
-        public $email;
-        public $genero;
-        public $edoCivil;
-        public $intereses;
-        public $password;
+        public $id=0;
+        public $nombre="";
+        public $apellido1="";
+        public $apellido2="";
+        public $edad=0;
+        public $fechaNac=new DateTime();//->format('Y-m-d');
+        public $email="";
+        public $genero="M";
+        public $edoCivil=1;
+        public $intereses=[];
+        public $password="";
     }
 ?>

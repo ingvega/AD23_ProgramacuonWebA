@@ -15,10 +15,15 @@
         return "";
     }
     
+    $usuario=new Usuario();
+
     $valNombre=$valApe1=$valApe2=$valEmail=$valGenero=$valIntereses=$valFechaNac=$valTerminos=$valEstadoCivil=$valPassword="";
-    
-    //Cuando post no trae datos asumimos que la operación es agregar
-    if(count($_POST)>0){
+    if(count($_POST)==1 && ISSET($_POST["id"]) && is_numeric($_POST["id"])){
+        //Obtener la info del usuario con ese id
+        $dao=new DAOUsuario();
+        $usuario=$dao->obtenerUno($_POST["id"]);
+        
+    }elseif(count($_POST)>1){
         $valNombre=$valApe1=$valApe2=$valEmail=$valGenero=$valIntereses=$valFechaNac=$valTerminos=$valEstadoCivil=$valPassword="is-invalid";
         $valido=true;
         if(ISSET($_POST["Nombre"]) && 
@@ -78,30 +83,32 @@
             $valido=false;
         }
 
-        if(ISSET($_POST["Terminos"]) && $_POST["Terminos"]==on ){
+        if(ISSET($_POST["Terminos"]) && $_POST["Terminos"]=="on" ){
             $valGenero="is-valid";
         }else{
             $valido=false;
         }
 
+        $usuario->nombre=ISSET($_POST["Nombre"])?trim($_POST["Nombre"]):"";
+        $usuario->apellido1=ISSET($_POST["Apellido1"])?trim($_POST["Apellido1"]):"";
+        $usuario->apellido2=ISSET($_POST["Apellido2"])?trim($_POST["Apellido2"]):"";
+        $usuario->fechaNac=DateTime::createFromFormat('Y-m-d', $_POST["FechaNac"]);
+        $usuario->email=$_POST["Email"];
+        $usuario->genero=$_POST["Genero"]=="Femenino"?"F":"M";
+        $usuario->edoCivil=$_POST["EstadoCivil"];
+        $usuario->password=$_POST["Password"];
+        $usuario->intereses=ISSET($_POST["Intereses"])?$_POST["Intereses"]:array();
+
         if($valido){
             //Guardar 
             //Crear un modelo Usuario con todos los datos
-            $obj = new Usuario();
-            $obj->nombre=trim($_POST["Nombre"]);
-            $obj->apellido1=trim($_POST["Apellido1"]);
-            $obj->apellido2=trim($_POST["Apellido2"]);
-            $obj->fechaNac=DateTime::createFromFormat('Y-m-d', $_POST["FechaNac"]);
-            $obj->email=$_POST["Email"];
-            $obj->genero=$_POST["Genero"]=="Femenino"?"F":"M";
-            $obj->edoCivil=$_POST["EstadoCivil"];
-            $obj->password=$_POST["Password"];
-            $obj->intereses=ISSET($_POST["Intereses"])?$_POST["Intereses"]:array();
-            var_dump($obj);
+            
+            
+            //var_dump($obj);
 
             //Usar el método agregar del dao
             $dao= new DAOUsuario();
-            if($dao->agregar($obj)==0){
+            if($dao->agregar($usuario)==0){
                 echo "Error al guardar";
             }else{
                 //Al finalizar el guardado redireccionar a la lista
