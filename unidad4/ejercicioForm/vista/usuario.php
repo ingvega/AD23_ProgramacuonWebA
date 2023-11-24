@@ -14,6 +14,7 @@
     </style>
 </head>
 <body>
+    
     <?php
       require('menu.php');
       require_once('../datos/daoUsuario.php');
@@ -25,7 +26,7 @@
                 <div class="col-4">
                     <label for="txtNombre" class="form-label">Nombre:</label>
                     <input type="text" id="txtNombre" name="Nombre" class="form-control <?=$valNombre?>"
-                    placeholder="Nombre" required value="<?php echo ISSET($_POST["Nombre"])?$_POST["Nombre"]:"" ?>">
+                    placeholder="Nombre" required value="<?= $usuario->nombre ?>">
                     <div class="invalid-feedback">
                         <ul>
                             <li>El nombre es obligatorio</li>
@@ -37,7 +38,7 @@
                 <div class="col-4">
                     <label for="txtApellido1" class="form-label">Primer apellido:</label>
                     <input type="text" id="txtApellido1" class="form-control <?=$valApe1?>" 
-                    name="Apellido1" placeholder="Primer apellido" value="<?php echo ISSET($_POST["Apellido1"])?$_POST["Apellido1"]:"" ?>">
+                    name="Apellido1" placeholder="Primer apellido" value="<?= $usuario->apellido1 ?>">
                     <div class="invalid-feedback">
                         <ul>
                             <li>El primer apellido es obligatorio</li>
@@ -49,7 +50,7 @@
                 <div class="col-4">
                     <label for="txtApellido2" class="form-label">Segundo apellido:</label>
                     <input type="text" id="txtApellido2" class="form-control <?=$valApe2?>" name="Apellido2" placeholder="Segundo apellido"
-                    value="<?= ISSET($_POST["Apellido2"])?$_POST["Apellido2"]:"" ?>">
+                    value="<?= $usuario->apellido2 ?>">
                     <div class="invalid-feedback">
                         <ul>
                             <li>Debe contener solo caracteres alfabéticos</li>
@@ -61,7 +62,7 @@
                 <div class="col-6">
                     <label for="txtEmail" class="form-label">Correo:</label>
                     <input type="email" id="txtEmail"  name="Email" class="form-control <?=$valEmail?>"
-                    placeholder="Correo electrónico" required value="<?php echo ISSET($_POST["Email"])?$_POST["Email"]:"" ?>">
+                    placeholder="Correo electrónico" required value="<?= $usuario->email ?>">
                     <div class="invalid-feedback">
                         <ul>
                             <li>El correo electrónico es obligatorio</li>
@@ -72,7 +73,7 @@
                 <div class="col-4">
                     <label for="txtFechaNac" class="form-label">Fecha de nacimiento:</label>
                     <input type="date" id="txtFechaNac" name="FechaNac" class="form-control <?=$valFechaNac?>"  
-                    value="<?= ISSET($_POST["FechaNac"])?$_POST["FechaNac"]:"" ?>"
+                    value="<?= $usuario->fechaNac->format('Y-m-d') ?>"
                     required>
                     <div class="invalid-feedback">
                         <ul>
@@ -84,7 +85,7 @@
                 <div class="col-6">
                     <label for="txtContrasenia" class="form-label">Contraseña:</label>
                     <input type="password" id="txtContrasenia"  name="Password" class="form-control <?=$valPassword?>"
-                    placeholder="Contraseña" required value="<?php echo ISSET($_POST["Password"])?$_POST["Password"]:"" ?>">
+                    placeholder="Contraseña" required value="<?= $usuario->password ?>">
                     <div class="invalid-feedback">
                         <ul>
                             <li>La contraseña es requerida</li>
@@ -96,7 +97,7 @@
                 <div class="col-6">
                     <label for="txtContrasenia2" class="form-label">Confirmar contraseña:</label>
                     <input type="password" id="txtContrasenia2" class="form-control <?=$valPassword?>"
-                    placeholder="Contraseña" required value="<?php echo ISSET($_POST["Password"])?$_POST["Password"]:"" ?>">
+                    placeholder="Contraseña" required value="<?= $usuario->password ?>">
                     <div class="invalid-feedback">
                         <ul>
                             <li>La contraseña es requerida</li>
@@ -108,16 +109,15 @@
                 <div class="col-4">
                     <p>Género:</p>
                     <div class="form-check">
-                        <input type="radio" class="form-check-input" id="rbtMasculino" name="Genero" value="Masculino" 
+                        <input type="radio" class="form-check-input" id="rbtMasculino" name="Genero" value="M" 
                         checked required>
                         <label class="form-check-label" for="rbtMasculino">
                             Masculino
                         </label>  
                     </div>
                     <div class="form-check">
-                        <input type="radio" id="rbtFemenino" class="form-check-input" name="Genero" Value="Femenino"
-                        <?= (ISSET($_POST["Genero"]) && 
-                            $_POST["Genero"]=="Femenino")?"checked":"" ?> required>
+                        <input type="radio" id="rbtFemenino" class="form-check-input" name="Genero" Value="F"
+                        <?= $usuario->genero=="F"?"checked":"" ?> required>
                         <label class="form-check-label" for="rbtFemenino">
                             Femenino
                         </label>
@@ -131,18 +131,15 @@
                 <div class="col-4">
                     <label for="cboEstadoCivil" class="form-label">Estado civil:</label>
                     <select class="form-select <?=$valEstadoCivil?>" id="cboEstadoCivil" name="EstadoCivil">
-                        <option value="1" <?php echo (ISSET($_POST["EstadoCivil"])
-                                                    && $_POST["EstadoCivil"]=="1")
+                        <option value="1" <?= ($usuario->edoCivil==1)
                                                 ?"selected":""; ?>>Soltero</option>
-                        <option value="2">Casado</option>
-                        <option value="3" <?php echo (ISSET($_POST["EstadoCivil"])
-                                                    && $_POST["EstadoCivil"]=="3")
+                        <option value="2" <?= ($usuario->edoCivil==2)
+                                                ?"selected":""; ?>>Casado</option>
+                        <option value="3" <?= ($usuario->edoCivil==3)
                                                 ?"selected":""; ?>>Divorciado</option>
-                        <option value="4" <?php echo (ISSET($_POST["EstadoCivil"])
-                                                    && $_POST["EstadoCivil"]=="4")
+                        <option value="4" <?= ($usuario->edoCivil==4)
                                                 ?"selected":""; ?>>Viudo</option>
-                        <option value="5" <?php echo (ISSET($_POST["EstadoCivil"])
-                                                    && $_POST["EstadoCivil"]=="5")
+                        <option value="5" <?= ($usuario->edoCivil==5)
                                                 ?"selected":""; ?>>Unión Libre</option>
                     </select>
                     <div class="invalid-feedback">
@@ -155,26 +152,26 @@
                     <p>Intereses:</p>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="Tecnologia"  name="Intereses[]" 
-                            id="chkTecnologia" <?=checkIntereses("Tecnologia") ?>>
+                            id="chkTecnologia" <?=checkIntereses($usuario,"Tecnologia") ?>>
                         <label class="form-check-label" for="chkTecnologia">Tecnología</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="chkCambioClimatico"  name="Intereses[]" 
-                            id="chkCambioClimatico" <?=checkIntereses("Cambio climático") ?>>
+                            id="chkCambioClimatico" <?=checkIntereses($usuario,"Cambio climático") ?>>
                         <label class="form-check-label" for="chkCambioClimatico">Cambio climático</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="Politica"  name="Intereses[]" 
-                            id="chkPolitica" <?=checkIntereses("Politica") ?>>
+                            id="chkPolitica" <?=checkIntereses($usuario,"Politica") ?>>
                         <label class="form-check-label" for="chkPolitica">Política</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="Covid19"  name="Intereses[]" 
-                            id="chkCovid19" <?=checkIntereses("Covid19") ?>>
+                            id="chkCovid19" <?=checkIntereses($usuario,"Covid19") ?>>
                         <label class="form-check-label" for="chkCovid19">COVID-19</label>
                     </div>
                 </div>
-                <div class="col-12">
+                <!--<div class="col-12">
                     <div class="form-check">
                         
                         <input id="chkTerminos" class="form-check-input <?=$valTerminos?>" type="checkbox" name="Terminos" >
@@ -187,14 +184,16 @@
                         
                     </div>
                 </div>
+    -->
             </div>
             <div class="row justify-content-center">
-                <button class="btn btn-primary col-4 mx-2">Guardar</button>
-                <button class="btn btn-secondary col-4 mx-2">Cancelar</button>
+                <button formaction="usuario.php" class="btn btn-primary col-4 mx-2">Guardar</button>
+                <button type="button" id="btnVolver" class="btn btn-secondary col-4 mx-2">Cancelar</button>
             </div>
             
         </form>
     </div>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/usuario.js"></script>
 </body>
 </html>

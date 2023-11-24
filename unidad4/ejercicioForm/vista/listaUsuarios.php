@@ -45,7 +45,7 @@
                            "<td>".($usuario->genero=="M"?"Masculino":"Femenino")."</td>".
                            "<td><form method='post'>".
                               "<button formaction='usuario.php' class='btn btn-primary' name='id' value='".$usuario->id."'>Editar</button>".
-                              "<button formaction='listaUsuario.php' class='btn btn-danger' name='id' value='".$usuario->id."'>Eliminar</button>".
+                              "<button type='button' class='btn btn-danger' onclick='confirmar(this)' name='id' value='".$usuario->id."'>Eliminar</button>".
                             "</form></td></tr>";
                 }
               ?>
@@ -101,6 +101,6 @@
     <script src="dt/Buttons-2.4.2/js/buttons.html5.min.js"></script>
     <script src="dt/Buttons-2.4.2/js/buttons.print.min.js"></script>
     <script src="dt/Buttons-2.4.2/js/buttons.colVis.min.js"></script>
-    <script src="js/tabla.js"></script>
+    <script src="js/listaUsuarios.js"></script>
 </body>
 </html>
