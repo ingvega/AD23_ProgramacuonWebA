@@ -22,9 +22,6 @@
         //Obtener la info del usuario con ese id
         $dao=new DAOUsuario();
         $usuario=$dao->obtenerUno($_POST["id"]);
-        echo "<pre>";
-        var_dump($usuario);
-        echo "</pre>";
     }elseif(count($_POST)>1){
         $valNombre=$valApe1=$valApe2=$valEmail=$valGenero=$valIntereses=$valFechaNac=$valTerminos=$valEstadoCivil=$valPassword="is-invalid";
         $valido=true;
