@@ -105,6 +105,40 @@ class DAOUsuario
             Conexion::desconectar();
         }
 	}
+
+    public function autenticar($correo, $password)
+	{
+		try
+		{ 
+            $this->conectar();
+            
+            //Almacenará el registro obtenido de la BD
+			$obj = null; 
+            
+			$sentenciaSQL = $this->conexion->prepare("SELECT id,nombre,apellido1,apellido2 FROM usuarios WHERE email=? AND password=sha2(?,224)"); 
+			//Se ejecuta la sentencia sql con los parametros dentro del arreglo 
+            $sentenciaSQL->execute(array($correo,$password));
+            
+            /*Obtiene los datos*/
+			$fila=$sentenciaSQL->fetch(PDO::FETCH_OBJ);
+			if($fila){
+                $obj = new Usuario();
+                
+                $obj->id = $fila->id;
+                $obj->nombre = $fila->nombre;
+                $obj->apellido1 = $fila->apellido1;
+                $obj->apellido2 = $fila->apellido2;
+            
+                return $obj;
+            }
+            return null;
+		}
+		catch(Exception $e){
+            return null;
+		}finally{
+            Conexion::desconectar();
+        }
+	}
     
     /**
      * Elimina el usuario con el id indicado como parámetro

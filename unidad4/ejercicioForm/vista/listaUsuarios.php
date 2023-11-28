@@ -19,6 +19,12 @@
 </head>
 <body>
       <?php
+
+      session_start();
+      if(!ISSET($_SESSION["usuario"])){
+        header("Location:index.html");
+      }
+
       require('menu.php');
       require_once('../datos/daoUsuario.php');
       $dao=new DAOUsuario();
