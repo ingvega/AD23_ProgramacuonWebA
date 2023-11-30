@@ -26,6 +26,16 @@
                 </ul>
               </li>
             </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <?=ISSET($_SESSION["nombre"])?$_SESSION["nombre"]:""?>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="cerrarSesion.php">Cerrar Sesión</a></li>
+                </ul>
+              </li>
+            </ul>
           </div>
         </div>
       </nav>

@@ -15,14 +15,30 @@
 </head>
 <body>
     
-    <?php
+<?php
+
+    session_start();
+    if(!ISSET($_SESSION["usuario"])){
+    header("Location:index.html");
+    }
       require('menu.php');
       require_once('../datos/daoUsuario.php');
       require_once('usuarioUtil.php');
     ?>
     <div class="container mt-3">
+        <?php
+            if(ISSET($_SESSION["msj"])){
+            $mensaje=explode("-",$_SESSION["msj"]);
+            ?>
+            <div id="mensajes" class="alert alert-<?=$mensaje[0]?>">
+                <?=$mensaje[1]?>
+            </div>
+        <?php
+        UNSET($_SESSION["msj"]);
+        }
+        ?>
         <form method="post">
-            <input type="hidden" name="id" value="<?= $usuario->id ?>">
+            <input type="hidden" name="Id" value="<?= $usuario->id ?>">
             <div class="row">
                 <div class="col-4">
                     <label for="txtNombre" class="form-label">Nombre:</label>

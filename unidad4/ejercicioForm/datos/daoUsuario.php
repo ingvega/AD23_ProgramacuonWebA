@@ -199,9 +199,10 @@ class DAOUsuario
                       $obj->apellido1,
                       $obj->apellido2,
 					  $obj->email,
-                      $obj->fechaNac,
+                      $obj->fechaNac->format('Y-m-d'),
                       $this->calcularEdad($obj->fechaNac),
-                      $obj->genero=implode(",",$obj->intereses),
+                      $obj->genero,
+                      implode(",",$obj->intereses),
                       $obj->edoCivil,
                       $obj->password,
 					  $obj->id)

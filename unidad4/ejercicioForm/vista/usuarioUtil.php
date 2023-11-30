@@ -82,7 +82,7 @@
             $valido=false;
         }
 
-        
+        $usuario->id=ISSET($_POST["Id"])?trim($_POST["Id"]):0;
         $usuario->nombre=ISSET($_POST["Nombre"])?trim($_POST["Nombre"]):"";
         $usuario->apellido1=ISSET($_POST["Apellido1"])?trim($_POST["Apellido1"]):"";
         $usuario->apellido2=ISSET($_POST["Apellido2"])?trim($_POST["Apellido2"]):"";
@@ -94,17 +94,29 @@
         $usuario->intereses=ISSET($_POST["Intereses"])?$_POST["Intereses"]:array();
 
         if($valido){
-            //Guardar 
-            //Crear un modelo Usuario con todos los datos
+            
         
             //Usar el método agregar del dao
             $dao= new DAOUsuario();
-            if($dao->agregar($usuario)==0){
-                echo "Error al guardar";
+            
+            if($usuario->id==0){
+                if($dao->agregar($usuario)==0){
+                    $_SESSION["msj"]="danger-Error al intentar guardar";
+                }else{
+                    $_SESSION["msj"]="success-El usuario ha sido almacenado exitósamente";
+                    //Al finalizar el guardado redireccionar a la lista
+                    header("Location: listaUsuarios.php");
+                }
             }else{
-                //Al finalizar el guardado redireccionar a la lista
-                header("Location: listaUsuarios.php");
+                if($dao->editar($usuario)){
+                    $_SESSION["msj"]="success-El usuario ha sido almacenado exitósamente";
+                    //Al finalizar el guardado redireccionar a la lista
+                    header("Location: listaUsuarios.php");
+                }else{
+                    $_SESSION["msj"]="danger-Error al intentar guardar";
+                }
             }
+            
         }
 
       }
