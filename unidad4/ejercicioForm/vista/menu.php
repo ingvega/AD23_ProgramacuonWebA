@@ -14,7 +14,14 @@
                   Catálogos
                 </a>
                 <ul class="dropdown-menu">
+                  <?php
+                  session_start();
+                  if(ISSET($_SESSION["usuario"]) && $_SESSION["usuario"]==1){
+                  ?>
                   <li><a class="dropdown-item" href="listaPersonas.php">Personas</a></li>
+                  <?php
+                  }
+                  ?>
                   <li><a class="dropdown-item" href="listaUsuarios.php">Usuarios</a></li>
                 </ul>
               </li>

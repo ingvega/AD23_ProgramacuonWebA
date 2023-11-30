@@ -22,6 +22,7 @@
     ?>
     <div class="container mt-3">
         <form method="post">
+            <input type="hidden" name="id" value="<?= $usuario->id ?>">
             <div class="row">
                 <div class="col-4">
                     <label for="txtNombre" class="form-label">Nombre:</label>
